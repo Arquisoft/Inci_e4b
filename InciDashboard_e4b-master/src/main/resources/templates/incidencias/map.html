@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/head" />
+<body>
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h1>Incidencia</h1>
+		<p>
+			Nombre de la incidencia: <i th:text="${incid.incidenceName}"></i>
+		</p>
+		<p>
+			Descripcion: <i th:text="${incid.description}"></i>
+		</p>
+		<p>
+			Latitud: <i th:text="${incid.location.latitude}"></i>
+		</p>
+		<p>
+			Longitud: <i th:text="${incid.location.longitude}"></i>
+		</p>
+		<div id="map" style="width: 100%; height: 400px;"></div>
+
+		<script th:inline="javascript">
+		/*<![CDATA[*/
+			
+		function myMap() {
+			var latitude = [[${incid.location.latitude}]];
+			var longitude = [[${incid.location.longitude}]];			
+			var location = new google.maps.LatLng(latitude, longitude);
+			var mapCanvas = document.getElementById("map");
+			var mapOptions = {
+				center : location,
+				zoom : 13
+			};
+			
+			var marker = new google.maps.Marker({
+			    position: location,
+			    title:[[${incid.incidenceName}]]
+			});
+			
+			
+			var map = new google.maps.Map(mapCanvas, mapOptions);
+			
+			marker.setMap(map); 
+		}
+		/*]]>*/
+	</script>
+
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuFVvIuUzKACkn5h4P_MAL34a46zghoF4&callback=myMap"></script>
+	
+	</div>
+</body>
+</html>

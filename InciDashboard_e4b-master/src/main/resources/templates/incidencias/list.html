@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2>Incidencias:</h2>
+
+		<div class="table-responsive">
+			<table class="table table-hover" th:fragment="incidenciasOperador"
+				id="incidenciasOperador">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Descripcion</th>
+						<th>Fecha de expiracion</th>
+						<th>Estado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="incidencia : ${incidencias}">
+
+						<td th:text="${incidencia.incidenceName}"></td>
+						<td th:text="${incidencia.description}"></td>
+						<td th:text="${#dates.format(incidencia.expirationDate, 'dd-MM-yyyy')}"></td>
+						<td>
+							<script type="text/javascript">
+								//<![CDATA[
+									$("select").on('change', function() {
+										var valor = $(this).attr('id');
+										$.get( "/incidence/update", 
+												{ 
+													id: valor,
+												  	estado: document.getElementById(valor).value,
+												 } , function( data ) {
+											var sel = document.getElementById(valor);
+											for(var i = 0; i < sel.options.length; i++){
+												if(sel.options[i].value == valor ){
+													pos = i;
+												}
+											}
+											sel.options[pos].selected = true;
+											var urlUpdate = '/incidencias/list';
+											$("#incidenciasOperador").load(urlUpdate);
+										})
+									})
+								//]]>
+							</script>
+							<select th:name="statusOptions" th:id="${incidencia.id}">
+								<option value="abierta" th:selected="${incidencia.statusIs('ABIERTA')}">Abierta</option>
+								<option value="enProceso" th:selected="${incidencia.statusIs('EN_PROCESO')}">En proceso</option>
+								<option value="cerrada" th:selected="${incidencia.statusIs('CERRADA')}">Cerrada</option>
+								<option value="anulada" th:selected="${incidencia.statusIs('ANULADA')}">Anulada</option>
+							</select>
+						</td>
+						<td><a th:href="@{'http://localhost:8090/incidencias/location/'+${incidencia.id}}">Ver en mapa</a>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<footer class="footer" th:replace="fragments/footer :: footer" />
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2>Notificaciones:</h2>
+
+		<div class="table-responsive">
+			<table class="table table-hover" th:fragment="notificacionesOperador"
+				id="incidenciasOperador">
+				<thead>
+					<tr>
+						<th>Identificador</th>
+						<th>Descripcion</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="notificacion : ${notificaciones}">
+
+						<td th:text="${notificacion.id}"></td>
+						<td th:text="${notificacion.comentario}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<footer class="footer" th:replace="fragments/footer :: footer" />
+</body>
+</html>

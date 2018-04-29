@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head"/>
+<body>
+	<nav th:replace="fragments/nav"/>
+	
+	<div class="container" style="text-align: center">
+		<h1>Dashboard</h1>
+		<h2>Receiving messages for you:</h2>
+		<div class="table-responsive">
+			<table class="table table-hover" th:fragment="incidenciasOperador"
+				id="incidenciasOperador">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Descripcion</th>
+						<th>Etiquetas</th>
+						<th>Fecha de expiracion</th>
+						<th>Estado</th>
+						<th>Campos</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="incidencia : ${incidencias}">
+
+						<td th:text="${incidencia.incidenceName}"></td>
+						<td th:text="${incidencia.description}"></td>
+						<td>
+							<ul th:each="tag : ${incidencia.tags}">
+								<li th:text="${tag}"></li>
+							</ul>
+						</td>
+						<td th:text="${#dates.format(incidencia.expirationDate, 'dd-MM-yyyy')}"></td>
+						<td th:text="${incidencia.status}"></td>
+						<td>
+							<ul th:each="campo : ${incidencia.fields}">
+								<li th:text="${campo.key} + ': ' + ${campo.value}"></li>
+							</ul>
+						</td>
+						
+						<td><a th:href="@{'http://localhost:8090/incidencias/location/'+${incidencia.id}}">Ver en mapa</a>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<footer th:replace="fragments/footer"/>
+</body>
+</html>
