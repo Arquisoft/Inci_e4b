@@ -52,7 +52,7 @@ public class AgentsController {
 
 		session.setAttribute("agent", agent);
 
-		return "incidence/add";
+		return "redirect:/incidence/add";
 	}
 
 }

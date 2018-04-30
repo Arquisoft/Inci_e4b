@@ -1,14 +1,27 @@
 package e4b.InciManager_e4b.steps;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import asw.controllers.AgentsController;
 import asw.database.entities.Agent;
 import cucumber.api.PendingException;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -17,41 +30,54 @@ public class LoginSteps {
   
   private static final Logger LOG = LoggerFactory.getLogger(AgentsController.class);
 
-  @Given("^a list of agents:$")
-  public void a_list_of_users(List<Agent> agents) throws Throwable {
-    for (Agent a: agents) {
-      System.out.println("Inserting agent..." + a.getEmail() + " - " + a.getPassword());
-    }
-  }
+	private WebDriver driver;
+	
+	private String baseUrl;
+	private StringBuffer verificationErrors = new StringBuffer();
 
-  @When("^I login with email \"(.+)\" and password \"(.+)\"$")
-  public void i_login_with_name_and_password(String email, String password) throws Throwable {
-    System.out.println("Login with values..." + email + " - " + password);
-  }
 
-  @Then("^I receive a welcome message$")
-  public void i_receive_a_welcome_message() throws Throwable {
-    System.out.println("Wellcome value received");
-  }
+	@Before
+	public void setUp() {
+		driver = new HtmlUnitDriver();
+		baseUrl = "http://localhost:8080/login";
+		driver.navigate().to(baseUrl);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	}
+
+
+
+	@Given("^a registered agent with name \"([^\"]*)\" and password \"([^\"]*)\"$")
+	public void a_registered_agent_with_name_and_password(String username, String password) throws Throwable {
+		LOG.info("Un agente registrado en el sistema con el nombre de usuario: '" + username
+				+ "' y  contraseña: '" + password + "'");
+	}
+	@When("^the username \"([^\"]*)\" and  password \"([^\"]*)\" are correct$")
+	public void the_username_and_password_are_correct(String username, String password) throws Throwable {
+		LOG.info("El agente introduce los datos: '" + username
+				+ "' y  contraseña: '" + password + "'");
+		new WebDriverWait(driver, 30)
+		.until(ExpectedConditions.visibilityOfElementLocated(By.id("userid")));	
+		driver.findElement(By.id("userid")).sendKeys(username);
+		driver.findElement(By.id("password")).sendKeys(password);
+		driver.findElement(By.id("login")).click();
+	}
+
+
+
+
+	@Then("^the agent can create an incidence in the url \"([^\"]*)\"$")
+	public void the_agent_can_create_an_incidence_in_the_url(String url) throws Throwable {
+		LOG.info("Entonces puedo procesar incidencias desde la página principal: '" + url + "'");
+		driver.navigate().to(url);
+		assertNotNull(driver.findElement(By.name("incidenceName")));
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		driver.quit();
+		
+}
   
-  @Given("^there are no users$")
-  public void there_are_no_users() throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      System.out.println("Creating an empty DB");
-  }
-
-  @When("^I create a user \"([^\"]*)\" with password \"([^\"]*)\"$")
-  public void i_create_a_user_with_password(String arg1, String arg2) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      System.out.println("Creating user " + arg1 + " with password " + arg2);
-  }
-
-  @Then("^The number of users is (\\d+)$")
-  public void the_number_of_users_is(int arg1) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      System.out.println("Checking numbers");
-
-  }
   
   public static class User {
     private String name;
