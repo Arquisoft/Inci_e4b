@@ -18,7 +18,7 @@
 					</tr>
 				</thead>
 				<tbody id="bodyIncidencias">
-					<tr th:each="incidencia : ${incidencias}" th:id="${inci + incidencia.id}">
+					<tr th:each="incidencia : ${incidencias}" th:id="${incidencia.id}">
 
 						<td th:text="${incidencia.incidenceName}"></td>
 						<td th:text="${incidencia.description}"></td>
@@ -39,26 +39,6 @@
 	</div>
 	<footer class="footer" th:replace="fragments/footer :: footer" />
 </body>
-	<script th:inline="javascript">
-		$('select').on('change', function() {
-			var valor = $(this).attr('id');
-			$.get( "/incidence/update", 
-			{ 
-				id: valor,
-				estado: document.getElementById(valor).value,
-			 } , function( data ) {
-				var sel = document.getElementById(valor);
-				for(var i = 0; i < sel.options.length; i++){
-					if(sel.options[i].value == valor ){
-				pos = i;
-												}
-			}
-			sel.options[pos].selected = true;
-			var urlUpdate = '/incidencias/list';
-			$("#incidenciasOperador").load(urlUpdate);
-			})
-		});
-	</script>
 	<script th:inline="javascript">
 	function actualizarIncidencias(){
 		var id = [[${id}]];
@@ -88,7 +68,7 @@
 				"<td>" + respuesta[i].description + "</td>" + 
 				"<td>" + respuesta[i].expirationDate + "</td>" +
 				"<td>"  + 
-				"<select id=" + id + ">" +
+				"<select class=" + "selectores " + "id=" + id + ">" +
 				"<option>" + "ABIERTA" + "</option>" +
 				"<option>" + "EN PROCESO" + "</option>" +
 				"<option>" + "CERRADA" + "</option>" +
@@ -98,7 +78,31 @@
 				"</tr>";
 			
 				$('#bodyIncidencias').append(texto);
-				$('#' + id).val(respuesta[i].status).change();
+				
+				if(respuesta[i].status == "EN_PROCESO"){
+					$('#' + id).val("EN PROCESO").change();
+				}
+				else{
+					$('#' + id).val(respuesta[i].status).change();
+				}
+				$("select").on('change', function() {
+					var valor = $(this).attr('id');
+					$.get( "/incidence/update", 
+							{ 
+								id: valor,
+							  	estado: document.getElementById(valor).value,
+							 } , function( data ) {
+						var sel = document.getElementById(valor);
+						for(var i = 0; i < sel.options.length; i++){
+							if(sel.options[i].value == valor ){
+								pos = i;
+							}
+						}
+						sel.options[pos].selected = true;
+						var urlUpdate = '/incidencias/list';
+						$("#incidenciasOperador").load(urlUpdate);
+					})
+				});
 			}
 			
 		}

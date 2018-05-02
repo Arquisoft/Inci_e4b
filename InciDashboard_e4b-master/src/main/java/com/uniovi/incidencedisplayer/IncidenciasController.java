@@ -31,8 +31,8 @@ public class IncidenciasController {
 	}
 	
 	@RequestMapping(value = "/incidence/update", method=RequestMethod.GET)
-	public String updateStatus(@RequestParam(defaultValue = "") Long id, 
-				@RequestParam(defaultValue = "") String estado) {
+	public String updateStatus(@RequestParam Long id, 
+				@RequestParam String estado) {
 		incidenceService.updateStatusIncidence(id, estado);
 		return "incidencias/list";
 	}
