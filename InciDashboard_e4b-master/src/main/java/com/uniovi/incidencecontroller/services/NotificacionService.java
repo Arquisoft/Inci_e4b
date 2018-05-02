@@ -47,5 +47,13 @@ public class NotificacionService {
 	public Page<Notificacion> getNotificacionPorOperario(Pageable pageable, Long id){
 		return nr.findByOperario(pageable,id);
 	}
+	
+	public Page<Notificacion> getNotificacion(Pageable pageable, Long id){
+		return nr.findById(pageable, id);
+	}
+	
+	public void deleteNotificacion(Long id) {
+		nr.delete(id);
+	}
 
 }

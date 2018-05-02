@@ -35,14 +35,16 @@ public class CheckDangerImpl implements DangerAssigner{
 	 * en caso de que sea peligroso habrá que enviar una notificación al operario.
 	 */
 	@Override
-	public void checkDanger(Incidencia incidencia, Operario operario) {
+	public boolean checkDanger(Incidencia incidencia, Operario operario) {
 		List<FiltroPropiedades> filtros = filterService.findByOperario(operario);
-		
+		boolean es_peligrosa = false;
 		for(FiltroPropiedades filtro : filtros) {
 			if(filtro.applicateFilter(incidencia)) {
 				logger.info("La incidencia " + incidencia.getId() + " se considera peligrosa por el filtro " + filtro.getId());
+				es_peligrosa = true;
 			}
 		}
+		return es_peligrosa;
 	}
 
 }

@@ -66,7 +66,7 @@ public class Operario {
 	 * Notificaciones del operario.
 	 */
 	@OneToMany
-	private List<Notificacion> notificaciones;
+	private List<Notificacion> notificaciones = new ArrayList<Notificacion>();
 
 	/**
 	 * Constructor vacio del Operario, se usa para crear el bean.
@@ -198,14 +198,6 @@ public class Operario {
 		return notificaciones;
 	}
 
-	/**
-	 * Setter del atributo notificaciones.
-	 * @param notificaciones -> Asigna el valor dado.
-	 */
-	public void setNotificaciones(List<Notificacion> notificaciones) {
-		this.notificaciones = notificaciones;
-	}
-	
 	
 	
 }
