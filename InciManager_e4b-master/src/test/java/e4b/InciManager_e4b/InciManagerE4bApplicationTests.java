@@ -85,7 +85,7 @@ public class InciManagerE4bApplicationTests {
 	}
 	
 	@Test
-	public void jsonTest() {
+	public void IncidenceJsonTest() {
 		
 		Incidence o = new Incidence();
 		KafkaProducer kp = new KafkaProducer();
@@ -99,6 +99,33 @@ public class InciManagerE4bApplicationTests {
 		
 		try {
 			assertEquals(kp.JsonToIncidence(JSON), o);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+			fail();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+			fail();
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+	@Test
+	public void IncidenceIdJsonTest() {
+		
+		Incidence o = new Incidence();
+		KafkaProducer kp = new KafkaProducer();
+		String JSON="";
+		try {
+			JSON = kp.IncidenceIdToJson(o);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			fail();
+		}
+		
+		try {
+			assertEquals(kp.JsonToIncidence(JSON), o.getId());
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 			fail();
