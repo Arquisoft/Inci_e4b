@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uniovi.entities.Incidencia;
-import com.uniovi.incidencecontroller.repositories.IncidenceRepository;
 import com.uniovi.incidencecontroller.services.IncidenceService;
 
 /**
@@ -17,16 +16,13 @@ import com.uniovi.incidencecontroller.services.IncidenceService;
  */
 @Controller
 public class IncidenciasController {
-
-	@Autowired
-	private IncidenceRepository incidenceRepository;
 	
 	@Autowired
 	private IncidenceService incidenceService;
 
 	@RequestMapping("/incidencias/location/{id}")
 	public String getLocationInci(Model model, @PathVariable Long id) {
-		Incidencia incidencia = incidenceRepository.findById(id);
+		Incidencia incidencia = incidenceService.findById(id);
 		if (incidencia != null) {
 			model.addAttribute("incid", incidencia);
 			return "incidencias/map";

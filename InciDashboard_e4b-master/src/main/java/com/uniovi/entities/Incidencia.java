@@ -15,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.uniovi.entities.extras.Location;
 import com.uniovi.entities.extras.Status;
 
@@ -316,6 +319,37 @@ public class Incidencia {
 			return true;
 		return status.equals(Status.ANULADA) && "ANULADA".equals(estado);
 	}
+	
+	public JSONObject toJson() {
+		JSONObject item = new JSONObject();
+		
+		item.put("id", id);
+		item.put("incidenceName", incidenceName);
+		item.put("description", description);
+		
+		JSONArray location = new JSONArray();
+		location.put(this.location.getLatitude());
+		location.put(this.location.getLongitude());
+		item.put("location", location);
+		
+		JSONArray tags = new JSONArray();
+		this.tags.forEach(t -> tags.put(t));
+		item.put("tags", tags);
+		
+		JSONArray fields = new JSONArray();
+		this.fields.forEach( (k,f) ->{
+			JSONObject object = new JSONObject();
+			object.put(k, f);
+			fields.put(object);
+		});
+		item.put("fields", fields);
+		
+		item.put("status", status);
+		item.put("comment", comments);
+		item.put("expirationDate", expirationDate);
+		
+		return item;
+	}
 
 	@Override
 	public int hashCode() {
@@ -343,12 +377,5 @@ public class Incidencia {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Incidence [incidenceName= " + incidenceName + ", description= " + description + 
-				", location= " + location + ", tags= " + tags + ", fields= " + fields + 
-					", comments= " + comments  + ", status= " + status + 
-						", expirationDate= " + expirationDate + "]";
-	}
 	
 }
