@@ -2,8 +2,10 @@ package com.uniovi.entities;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -14,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -93,6 +96,11 @@ public class Incidencia {
 	@JoinColumn(name = "operario")
 	private Operario operario;
 	
+	/**
+	 * Conjunto de notificaciones de la incidencia
+	 */
+	@OneToMany(mappedBy ="incidencia")
+	private Set<Notificacion> notificaciones = new HashSet<Notificacion>();
 	
 	/**
 	 * Constructor vacio
@@ -304,6 +312,14 @@ public class Incidencia {
 		this.operario = operario;
 	}
 	
+	/**
+	 * Devuelve una notificacion si la incidencia es peligrosa 
+	 * @return notificacion 
+	 */
+	public Set<Notificacion> getNotificaciones(){
+		return notificaciones;
+	}
+
 	/**
 	 * Retorna si el estado recibido es el estado actual de la incidencia.
 	 * @param estado -> Estado a comprobar.

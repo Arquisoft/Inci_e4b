@@ -36,6 +36,15 @@ public class KafkaProducer {
 		}
 
 	}
+	
+	public String IncidenceIdToJson(Incidence i) throws JsonProcessingException {
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		ObjectWriter json = mapper.writerWithDefaultPrettyPrinter();
+
+		return json.writeValueAsString(i.getId());
+	}
 
 	public String IncidenceToJson(Incidence o) throws JsonProcessingException {
 

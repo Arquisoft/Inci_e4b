@@ -145,11 +145,9 @@ public class OperarioTest {
 		notificacion.setId(1L);
 
 		Operario operario1 = new Operario();
-		operario1.setNotificaciones(new ArrayList<Notificacion>());
 		operario1.getNotificaciones().add(notificacion);
 
 		Operario operario2 = new Operario();
-		operario2.setNotificaciones(new ArrayList<Notificacion>());
 		operario2.getNotificaciones().add(notificacion);
 
 		for(int i=0;i<operario1.getNotificaciones().size();i++)
@@ -165,11 +163,9 @@ public class OperarioTest {
 		notificacion2.setId(2L);
 
 		Operario operario1 = new Operario();
-		operario1.setNotificaciones(new ArrayList<Notificacion>());
 		operario1.getNotificaciones().add(notificacion);
 
 		Operario operario2 = new Operario();
-		operario2.setNotificaciones(new ArrayList<Notificacion>());
 		operario2.getNotificaciones().add(notificacion2);
 
 		for(int i=0;i<operario1.getNotificaciones().size();i++)

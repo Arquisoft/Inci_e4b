@@ -29,12 +29,6 @@ public class OperarioController {
     }
     
     
-    @RequestMapping(value="notificaciones/list")
-    public String getNotificacionesList(Model model) {
-	    	UserDetails logged = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	    	Operario operario = operarioService.findByDni(logged.getUsername());    	
-	    	model.addAttribute("notificaciones", operario.getNotificaciones());   	
-		return "notificaciones/list";
-    }
+  
     
 }

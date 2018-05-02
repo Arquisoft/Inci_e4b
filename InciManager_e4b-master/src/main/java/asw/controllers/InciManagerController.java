@@ -13,17 +13,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import asw.chatbot.ChatBot;
 import asw.database.entities.Agent;
 import asw.database.entities.Incidence;
 import asw.database.location.Location;
 import asw.database.status.Status;
 import asw.filters.FilterBySenderKind;
+import asw.producers.KafkaProducer;
 import asw.services.IncidenceService;
 
 @Controller
 public class InciManagerController {
 
+	@Autowired
+	private KafkaProducer kafkaProducer;
+	
 	@Autowired
 	private IncidenceService inciService;
 
@@ -44,7 +50,7 @@ public class InciManagerController {
 
 	@RequestMapping(value = "/incidence/add", method = RequestMethod.POST)
 	private String POSTaddIncidence(HttpSession session, Model model, @ModelAttribute Incidence inci,
-			@ModelAttribute Location loc) {
+			@ModelAttribute Location loc) throws JsonProcessingException {
 
 		Agent agent = (Agent) session.getAttribute("agent");
 
@@ -58,6 +64,8 @@ public class InciManagerController {
 			return "redirect:/";
 
 		model.addAttribute("inciId", inci.getId());
+		
+		kafkaProducer.send("Nueva incidencia" + String.valueOf(inci.getId()), kafkaProducer.IncidenceIdToJson(inci));
 
 		return "/incidence/confirm";
 	}
@@ -84,7 +92,7 @@ public class InciManagerController {
 	}
 
 	@RequestMapping(value="incidence/chatbot", method = RequestMethod.POST)
-	private String chatBotPost(HttpSession session, Model model, String answer) {
+	private String chatBotPost(HttpSession session, Model model, String answer) throws JsonProcessingException {
 		
 		ChatBot chatBot = ChatBot.getInstance();
 		

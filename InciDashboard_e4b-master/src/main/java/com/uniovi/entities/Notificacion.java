@@ -17,13 +17,14 @@ public class Notificacion {
 	private Operario operario;
 
 	private String comentario;
-	
+
+	@ManyToOne
+	private Incidencia incidencia;
 
 	public Notificacion() {
 	}
 
-	public Notificacion(Operario operario, String comentario) {
-		this.operario = operario;
+	public Notificacion(String comentario) {
 		this.comentario = comentario;
 	}
 
@@ -51,6 +52,18 @@ public class Notificacion {
 		this.id = id;
 	}
 
+	/**
+	 * Devuelve la incidencia de la cual notifica
+	 * @return incidencia
+	 */
+	public Incidencia getIncidencia() {
+		return incidencia;
+	}
+	
+	public void setIncidencia(Incidencia incidencia) {
+		this.incidencia = incidencia;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
