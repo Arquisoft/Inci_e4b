@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.uniovi.dangercontroller.CheckDangerImpl;
 import com.uniovi.entities.Incidencia;
+import com.uniovi.entities.Notificacion;
 import com.uniovi.entities.Operario;
 import com.uniovi.incidencecontroller.services.IncidenceService;
+import com.uniovi.incidencecontroller.services.NotificacionService;
 import com.uniovi.incidencecontroller.services.OperarioService;
 
 /**
@@ -35,6 +37,13 @@ public class IncidenceAssignerImpl implements IncidenceAssigner{
 	private IncidenceService incidenceService;
 	
 	/**
+	 * Usaremos el NotificacionService para añadir una notificacion en caso de que la 
+	 * incidencia sea peligrosa en la base de datos y se le notifique rapidamente al operario
+	 */
+	@Autowired
+	private NotificacionService notificacionService;
+	
+	/**
 	 * Usaremos la implementación del DangerAssigner para comprobar si una incidencia
 	 * es peligrosa según los filtros del operario a la que se le asigna dicha incidencia.
 	 */
@@ -50,8 +59,17 @@ public class IncidenceAssignerImpl implements IncidenceAssigner{
 		Operario toAssign = chooseOperario();
 		Incidencia incidencia = incidenceService.findById(id);
 		incidencia.setOperario(toAssign);
+		if(dangerAssigner.checkDanger(incidencia, toAssign)) {
+			Notificacion notificacion = new Notificacion("Incidencia peligrosa" + incidencia.getIncidenceName());
+			notificacion.setOperario(toAssign);
+			notificacion.setIncidencia(incidencia);
+			incidencia.getNotificaciones().add(notificacion);
+			toAssign.getNotificaciones().add(notificacion);
+			notificacionService.addNotificacion(notificacion);
+		}
+		
+		
 		incidenceService.saveIncidence(incidencia);
-		dangerAssigner.checkDanger(incidencia, toAssign);
 	}
 	
 	/**

@@ -14,6 +14,6 @@ public interface DangerAssigner {
 	 * @param incidencia -> Incidencia a comprobar si es peligrosa.
 	 * @param operario -> Operario al que se le asignó dicha incidencia.
 	 */
-	void checkDanger(Incidencia incidencia, Operario operario);
+	boolean checkDanger(Incidencia incidencia, Operario operario);
 	
 }

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,31 +26,31 @@ import com.uniovi.incidencecontroller.services.OperarioService;
  */
 @Controller
 public class NotificacionController {
-	
+
 	private static Logger log = LoggerFactory.getLogger(Application.class);
-	
+
 	@Autowired
 	private NotificacionService ns;
-	
+
 	@Autowired
 	private OperarioService os;
 
-	/**
-	 * Metodo que muestra las notificaciones de un operario 
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/notificaciones/list/{id}")
-	public String getInvitations(Model model, Pageable pageable, @PathVariable Long id) {
+	@RequestMapping(value = "/notificaciones/list")
+	public String getNotificacionesList(Model model, Pageable pageable) {
 		Page<Notificacion> notificaciones = new PageImpl<Notificacion>(new LinkedList<Notificacion>());
-		
-		Operario operario = os.findById(id);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Operario operario = os.findByDni(auth.getName());
 
-		notificaciones = ns.getNotificacionPorOperario(pageable, operario.getId());	
-		model.addAttribute("page", notificaciones);
+		notificaciones = ns.getNotificacionPorOperario(pageable, operario.getId());
+
 		model.addAttribute("notificaciones", notificaciones.getContent());
 
-		log.info("Listando notificaciones de:"+ operario.getNombre());
-		return "redirect:/";
+		return "/notificaciones/list";
+	}
+
+	@RequestMapping(value="/notificaciones/delete/{id}")
+	public String deleteNotificacion(@PathVariable Long id) {
+		ns.deleteNotificacion(id);
+		return "redirect:/notificaciones/list";
 	}
 }

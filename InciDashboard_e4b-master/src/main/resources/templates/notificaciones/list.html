@@ -20,6 +20,7 @@
 
 						<td th:text="${notificacion.id}"></td>
 						<td th:text="${notificacion.comentario}"></td>
+						<td><a th:ref="${'/notificaciones/delete/' + notificacion.id}">Eliminar</a></td>
 					</tr>
 				</tbody>
 			</table>
