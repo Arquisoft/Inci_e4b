@@ -19,9 +19,8 @@
 						<th>Campos</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr th:each="incidencia : ${incidencias}">
-
+				<tbody id="bodyIncidencias">
+					<tr th:each="incidencia : ${incidencias}" th:id="${incidencia.id}">
 						<td th:text="${incidencia.incidenceName}"></td>
 						<td th:text="${incidencia.description}"></td>
 						<td>
@@ -45,4 +44,61 @@
 	</div>
 	<footer class="footer" th:replace="fragments/footer :: footer" />
 </body>
+
+<script>
+	function actualizarIncidencias(){
+		$.ajax({
+			url: "http://localhost:8090/api/incidencias",
+			type: "GET",
+			data: { },
+			dataType: 'json',
+			success: function(respuesta){
+				actualizarTabla(respuesta);
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});	
+	}
+	
+	function actualizarTabla(respuesta){
+		for(i=0;i<respuesta.length;i++){
+			id = respuesta[i].id;
+			
+			if( $('#' + id).length<=0 ){
+				
+				tags = "<ul>";
+				for(j=0;j<respuesta[i].tags.length;j++){
+					tags += "<li>" + respuesta[i].tags[j] + "</li>";
+				}
+				tags += "</ul>";
+				
+				campos = "<ul>";
+				for(j=0;j<respuesta[i].fields.length;j++){
+					campos += "<li>" + respuesta[i].fields[j] + "</li>";
+				}
+				campos += "</ul>";
+				
+				
+				href = "<a href=http://localhost:8090/incidencias/location/" + id + ">Ver en el mapa</a>";
+				
+				texto = "<tr id=" + id + ">" + 
+				"<td>" + respuesta[i].incidenceName + "</td>" +
+				"<td>" + respuesta[i].description + "</td>" + 
+				"<td>" + tags + "</td>" +
+				"<td>" + respuesta[i].expirationDate + "</td>" +
+				"<td>" + respuesta[i].status + "</td>" + 
+				"<td>" + campos + "</td>" +
+				"<td>" + href + "</td>" +
+				"</tr>";
+			
+				$('#bodyIncidencias').append(texto);
+			}
+			
+		}
+	}
+	
+	setInterval(actualizarIncidencias, 1000);
+</script>
+
 </html>

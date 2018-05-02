@@ -22,8 +22,9 @@ public class OperarioController {
     @RequestMapping(value="incidencias/list")
     public String getIncidencesList(Model model) {
 	    	UserDetails logged = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	    	Operario operario = operarioService.findByDni(logged.getUsername());    	
-	    	model.addAttribute("incidencias", operario.getIncidencias());   	
+	    	Operario operario = operarioService.findByDni(logged.getUsername());
+	    	model.addAttribute("id", operario.getId());
+	    	//model.addAttribute("incidencias", operario.getIncidencias());   	
 		return "incidencias/list";
     }
     

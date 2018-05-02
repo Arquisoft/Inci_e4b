@@ -17,35 +17,13 @@
 						<th>Estado</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr th:each="incidencia : ${incidencias}">
+				<tbody id="bodyIncidencias">
+					<tr th:each="incidencia : ${incidencias}" th:id="${incidencia.id}">
 
 						<td th:text="${incidencia.incidenceName}"></td>
 						<td th:text="${incidencia.description}"></td>
 						<td th:text="${#dates.format(incidencia.expirationDate, 'dd-MM-yyyy')}"></td>
 						<td>
-							<script type="text/javascript">
-								//<![CDATA[
-									$("select").on('change', function() {
-										var valor = $(this).attr('id');
-										$.get( "/incidence/update", 
-												{ 
-													id: valor,
-												  	estado: document.getElementById(valor).value,
-												 } , function( data ) {
-											var sel = document.getElementById(valor);
-											for(var i = 0; i < sel.options.length; i++){
-												if(sel.options[i].value == valor ){
-													pos = i;
-												}
-											}
-											sel.options[pos].selected = true;
-											var urlUpdate = '/incidencias/list';
-											$("#incidenciasOperador").load(urlUpdate);
-										})
-									})
-								//]]>
-							</script>
 							<select th:name="statusOptions" th:id="${incidencia.id}">
 								<option value="abierta" th:selected="${incidencia.statusIs('ABIERTA')}">Abierta</option>
 								<option value="enProceso" th:selected="${incidencia.statusIs('EN_PROCESO')}">En proceso</option>
@@ -61,4 +39,75 @@
 	</div>
 	<footer class="footer" th:replace="fragments/footer :: footer" />
 </body>
+	<script th:inline="javascript">
+	function actualizarIncidencias(){
+		var id = [[${id}]];
+		
+		$.ajax({
+			url: "http://localhost:8090/api/operario/" + id ,
+			type: "GET",
+			data: { },
+			dataType: 'json',
+			success: function(respuesta){
+				actualizarTabla(respuesta);
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});	
+	}
+	
+	function actualizarTabla(respuesta){
+		for(i=0;i<respuesta.length;i++){
+			var id = respuesta[i].id;
+			var oficialId = "inci" + respuesta[i].id;
+			
+			if( $('#' + oficialId).length<=0 ){
+				texto = "<tr id=" + oficialId + ">" + 
+				"<td>" + respuesta[i].incidenceName + "</td>" +
+				"<td>" + respuesta[i].description + "</td>" + 
+				"<td>" + respuesta[i].expirationDate + "</td>" +
+				"<td>"  + 
+				"<select class=" + "selectores " + "id=" + id + ">" +
+				"<option>" + "ABIERTA" + "</option>" +
+				"<option>" + "EN PROCESO" + "</option>" +
+				"<option>" + "CERRADA" + "</option>" +
+				"<option>" + "ANULADA" + "</option>" +
+				"</select>" +
+				"</td>" + 
+				"</tr>";
+			
+				$('#bodyIncidencias').append(texto);
+				
+				if(respuesta[i].status == "EN_PROCESO"){
+					$('#' + id).val("EN PROCESO").change();
+				}
+				else{
+					$('#' + id).val(respuesta[i].status).change();
+				}
+				$("select").on('change', function() {
+					var valor = $(this).attr('id');
+					$.get( "/incidence/update", 
+							{ 
+								id: valor,
+							  	estado: document.getElementById(valor).value,
+							 } , function( data ) {
+						var sel = document.getElementById(valor);
+						for(var i = 0; i < sel.options.length; i++){
+							if(sel.options[i].value == valor ){
+								pos = i;
+							}
+						}
+						sel.options[pos].selected = true;
+						var urlUpdate = '/incidencias/list';
+						$("#incidenciasOperador").load(urlUpdate);
+					})
+				});
+			}
+			
+		}
+	}
+	
+	setInterval(actualizarIncidencias, 1000);
+</script>
 </html>
