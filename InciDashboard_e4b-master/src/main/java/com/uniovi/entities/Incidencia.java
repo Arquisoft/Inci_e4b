@@ -337,11 +337,7 @@ public class Incidencia {
 		item.put("tags", tags);
 		
 		JSONArray fields = new JSONArray();
-		this.fields.forEach( (k,f) ->{
-			JSONObject object = new JSONObject();
-			object.put(k, f);
-			fields.put(object);
-		});
+		this.fields.forEach( (k,f) -> fields.put(k + ":" + f));
 		item.put("fields", fields);
 		
 		item.put("status", status);

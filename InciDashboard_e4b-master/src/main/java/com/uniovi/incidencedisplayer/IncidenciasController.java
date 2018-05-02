@@ -39,7 +39,7 @@ public class IncidenciasController {
 	
 	@RequestMapping(value = "/incidencias/all", method=RequestMethod.GET)
 	public String getAll(Model model) {
-		model.addAttribute("incidencias", incidenceService.findAll());
+		//model.addAttribute("incidencias", incidenceService.findAll());
 		return "incidencias/all";
 	}
 }
