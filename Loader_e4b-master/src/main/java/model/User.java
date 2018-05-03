@@ -73,6 +73,15 @@ public class User implements Serializable {
 		generarPassword();
 	}
 	
+	public User(String nombre, String localizacion, String email, String identificador, Type type) {
+		setNombre(nombre);
+		setEmail(email);
+		setUsername(identificador);
+		setLocalizacion(localizacion);
+		_setTipo(type);
+		generarPassword();
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}

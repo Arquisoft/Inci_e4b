@@ -1,13 +1,10 @@
 package parser;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Level;
 
 import com.lowagie.text.DocumentException;
 
-import parser.reader.ReadList;
 import reportwriter.ReportWriter;
 
 public class ReaderSingleton {

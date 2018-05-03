@@ -2,7 +2,6 @@ package parser;
 
 import com.lowagie.text.DocumentException;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public interface Parser {
