@@ -1,12 +1,12 @@
 package asw.dbManagement.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import asw.dbManagement.model.Agent;
 
 @Repository
-public interface AgentsRepository extends JpaRepository<Agent, Long> {
+public interface AgentsRepository extends CrudRepository<Agent, Long> {
 	
 	/**
 	 * Método que devuelve el Participante el cual es buscado por email
@@ -22,5 +22,5 @@ public interface AgentsRepository extends JpaRepository<Agent, Long> {
 	 * @return el agente con dicho identificador
 	 */
 	public Agent findByIdentificador(String identificador);
-	
+
 }
