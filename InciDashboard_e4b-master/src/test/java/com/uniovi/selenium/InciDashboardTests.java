@@ -70,6 +70,62 @@ public class InciDashboardTests {
 
 	}
 	
+	/**
+	 * Estando logeado puedo acceder a la lista de mis incidencias
+	 */
+	@Test
+	public void P03IncidenciasList() {
+
+		PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
+
+		PO_LoginView.fillForm(driver, "111111Z", "123456");
+		
+		driver.navigate().to("http://localhost:8090/incidencias/list");
+	
+		PO_View.checkElement(driver, "text", "Incidencias:");
+
+	}
+	
+	/**
+	 * No estando logeado no puedo acceder a la lista de las incidencias
+	 */
+	@Test
+	public void P04IncidenciasInvalList() {
+		
+		driver.navigate().to("http://localhost:8090/incidencias/list");
+	
+		PO_View.checkElement(driver, "text", "Identifícate");
+
+	}
+	
+	/**
+	 * Estando logeado puedo agregar un nuevo filtro
+	 */
+	@Test
+	public void P05AddFilter() {
+
+		PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
+
+		PO_LoginView.fillForm(driver, "111111Z", "123456");
+		
+		driver.navigate().to("http://localhost:8090/filtro/add");
+	
+		PO_View.checkElement(driver, "text", "Agregar filtro");
+
+	}
+	
+	/**
+	 * No estando logeado puedo no se puede agregar un nuevo filtro
+	 */
+	@Test
+	public void P06NoAddFilter() {
+		
+		driver.navigate().to("http://localhost:8090/filtro/add");
+	
+		PO_View.checkElement(driver, "text", "Identifícate");
+
+	}
+
 	
 
 	// Después de cada prueba se borran las cookies del navegador
