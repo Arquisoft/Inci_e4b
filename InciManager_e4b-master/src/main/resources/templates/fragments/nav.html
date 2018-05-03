@@ -29,7 +29,7 @@
 				</form>
 				
 				<form action="/incidence/chatbot" style="display: inline"
-					th:if="${session.agent?.kind?.equals('Person')}">
+					th:if="${session.agent?.tipo?.type?.equals('Person')}">
 					<input type="submit" value="Ir a chat-bot" class="btn-primary" />
 				</form>
 
