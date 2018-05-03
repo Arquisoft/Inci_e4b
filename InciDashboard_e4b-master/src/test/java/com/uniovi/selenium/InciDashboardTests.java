@@ -45,15 +45,32 @@ public class InciDashboardTests {
 	 * Inicio de sesión con datos válidos.
 	 */
 	@Test
-	public void P03InVal() {
+	public void P01LogVal() {
 
 		PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 
-		PO_LoginView.fillForm(driver, "paco@hotmail.com", "123456");
+		PO_LoginView.fillForm(driver, "111111Z", "123456");
 	
 		PO_View.checkElement(driver, "text", "Notificaciones");
 
 	}
+	
+	
+	/**
+	 * Inicio de sesión con datos no válidos.
+	 */
+	@Test
+	public void P02LogInVal() {
+
+		PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
+
+		PO_LoginView.fillForm(driver, "11111Z", "123456");
+	
+		PO_View.checkElement(driver, "text", "DNI o contraseña invalidos");
+
+	}
+	
+	
 
 	// Después de cada prueba se borran las cookies del navegador
 	@After
