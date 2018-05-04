@@ -5,6 +5,7 @@
 	<nav th:replace="fragments/nav" />
 	<div class="container">
 		<h1>Login</h1>
+		<form method="POST" action="login">
 			<table>
 				<tr>
 					<td><label for="userid"><strong>Usuario:</strong> </label></td>
@@ -16,39 +17,11 @@
 					<td><input type="password" id="password" name="password" /></td>
 				</tr>
 				<tr>
-					<td><label for="kind"><strong>Kind:</strong>
-					</label></td>
-					<td><input type="text" id="kind" name="kind" /></td>
-				</tr>
-				<tr>
 					<td><button type="submit" id="login">Entrar</button></td>
 				</tr>
 			</table>
+		</form>
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>
-<script>
-	$('#login').click(function(){
-		tryLogin();
-	});
-	
-	function tryLogin(){
-		$.ajax({
-			url: "http://localhost:8081/user",
-			type: "POST",
-			data: {
-				"login": $('#userid').val(),
-				"password": $('#password').val(),
-				"kind": $('#kind').val()
-			},
-			contentType: 'application/json',
-			success: function(respuesta){
-				console.log(respuesta);
-			},
-			error: function(error){
-				console.log(error);
-			}
-		});
-	}
-</script>
 </html>

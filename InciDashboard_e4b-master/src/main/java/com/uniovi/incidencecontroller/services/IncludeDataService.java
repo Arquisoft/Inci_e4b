@@ -17,7 +17,7 @@ import com.uniovi.entities.extras.Location;
 /**
  * Servicio encargado de insertar unos datos iniciales en la base de datos.
  */
-@Service
+
 public class IncludeDataService {
 
 	@Autowired
