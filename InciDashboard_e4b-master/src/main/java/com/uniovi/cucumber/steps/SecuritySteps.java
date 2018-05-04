@@ -2,13 +2,14 @@ package com.uniovi.cucumber.steps;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.uniovi.selenium.utils.SeleniumUtils;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
@@ -24,8 +25,9 @@ public class SecuritySteps {
 	
 	public static WebDriver getDriver(String PathFirefox) {
 		// Firefox (Versión 46.0) sin geckodriver para Selenium 2.x.
-		System.setProperty("webdriver.firefox.bin", PathFirefox);
-		WebDriver driver = new FirefoxDriver();		
+//		System.setProperty("webdriver.firefox.bin", PathFirefox);
+//		WebDriver driver = new FirefoxDriver();		
+		driver = new HtmlUnitDriver();
 		return driver;
 	}
 
@@ -34,7 +36,7 @@ public class SecuritySteps {
 	public void a_user_with_username_and_password(String nombre, String password) throws Throwable {
 		driver = getDriver(PathFirefox);
 		driver.navigate().to(URL);
-		SeleniumUtils.esperarSegundos(driver, 1);
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		
 		WebElement element = driver.findElement(By.name("username"));
 		element.click();
@@ -47,14 +49,14 @@ public class SecuritySteps {
 		By boton = By.className("btn");
 		driver.findElement(boton).click();
 		System.out.println("Hace clik en boton Entrar");
-		SeleniumUtils.esperarSegundos(driver, 1);
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		System.out.println("Usuario " + nombre +" con pass " + password);
 	}
 
 	@When("^the user go to \"([^\"]*)\"$")
 	public void the_user_go_to(String url) throws Throwable {
 		driver.navigate().to(url);
-		SeleniumUtils.esperarSegundos(driver, 1);
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 	}
 	
 	@Then("^the user see the following text \"([^\"]*)\"$")

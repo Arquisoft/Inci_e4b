@@ -2,13 +2,14 @@ package com.uniovi.cucumber.steps;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
 import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-import com.uniovi.selenium.utils.SeleniumUtils;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
@@ -23,9 +24,10 @@ public class LoginSteps {
 	static String URL = "http://localhost:8090";
 	
 	public static WebDriver getDriver(String PathFirefox) {
-		// Firefox (Versión 46.0) sin geckodriver para Selenium 2.x.
-		System.setProperty("webdriver.firefox.bin", PathFirefox);
-		WebDriver driver = new FirefoxDriver();		
+//		// Firefox (Versión 46.0) sin geckodriver para Selenium 2.x.
+//		System.setProperty("webdriver.firefox.bin", PathFirefox);
+//		WebDriver driver = new FirefoxDriver();		
+		driver = new HtmlUnitDriver();
 		return driver;
 	}
 
@@ -53,7 +55,7 @@ public class LoginSteps {
 		By boton = By.className("btn");
 		driver.findElement(boton).click();
 		System.out.println("Hace clik en boton Entrar");
-		SeleniumUtils.esperarSegundos(driver, 1);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 
 	@Then("^the user should see the following text \"([^\"]*)\"$")
