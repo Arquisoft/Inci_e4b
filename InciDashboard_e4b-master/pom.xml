@@ -102,20 +102,18 @@
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-junit</artifactId>
 			<version>1.2.5</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-spring</artifactId>
 			<version>1.2.5</version>
-			<scope>test</scope>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>2.53.0</version>
+			<artifactId>selenium-htmlunit-driver</artifactId>
+			<version>2.52.0</version>
 		</dependency>
        
 	</dependencies>
