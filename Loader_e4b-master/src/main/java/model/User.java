@@ -7,11 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "agents")
 public class User implements Serializable {
 	/**
 	 * 
@@ -35,7 +36,9 @@ public class User implements Serializable {
 	@Column (nullable = true)
 	private String localizacion;
 	
-	@ManyToOne private Type tipo;
+	@ManyToOne 
+	@JoinColumn(name = "tipo")
+	private Type tipo;
 
 	public User() {
 	}

@@ -10,6 +10,8 @@ import java.util.Set;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -37,6 +39,7 @@ public class Incidence {
 	private Map<String, String> campos; // Campos propiedad valor
 
 	// Campos añadidos
+	@Enumerated(EnumType.STRING)
 	private Status status;
 	private String comments;
 	private Date expirationDate;
