@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-import com.lowagie.text.DocumentException;
-
 import reportwriter.ReportWriter;
 
 public class CSVReader implements ReadList {

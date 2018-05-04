@@ -25,7 +25,6 @@ public class GetParticipantImpl implements GetParticipant {
 	 */
 	@Override
 	public Agent getParticipant(String identificador) {
-		
 		return this.repository.findByIdentificador(identificador);
 	}
 

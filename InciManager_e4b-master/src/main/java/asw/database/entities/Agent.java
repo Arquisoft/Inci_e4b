@@ -1,15 +1,14 @@
 package asw.database.entities;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Participant")
+@Table(name = "agents")
 public class Agent {
 
 	// Id generado automáticamente para diferenciar cada uno (para mapear)
@@ -19,72 +18,61 @@ public class Agent {
 
 	// Atributos del participante
 	private String nombre;
-	private String apellidos;
-	private String password;
-	private Date fechaNacimiento;
-	@Column(unique = true, nullable = false)
-	private String email;
-	@Column(unique = true)
-	private String identificador;
-	private String direccion;
-	
-	private String kind;
-	private int kindCode;
 
+	private String email;
+	
+	private String identificador;
+	
+	private String username;
+	
+	private String password;
+	
+	private String localizacion;
+	
+	@ManyToOne
+	@JoinColumn(name = "tipo")
+	private Type tipo;
 
 	/**
 	 * Constructor vacio (ya que es para mapear)
 	 */
-	Agent() {
+	public Agent() {
 	}
 
-	/**
-	 * Constructor a�o pasado en el se construyen agentes de tipo persona, no tienen el campo tipo ni codigo de tipo
-	 * 
-	 * @param nombre
-	 * @param apellidos
-	 * @param password
-	 * @param fechaNacimiento
-	 * @param email
-	 * @param dNI
-	 * @param direccion
-	 * @param nacionalidad
-	 */
-//	public Agent(String nombre, String apellidos, String password, Date fechaNacimiento, String email, String dNI,
-//			String direccion, String nacionalidad, boolean isAdmin, boolean isPolitician) {
-//		super();
-//		this.nombre = nombre;
-//		this.apellidos = apellidos;
-//		this.password = password;
-//		this.fechaNacimiento = fechaNacimiento;
-//		this.email = email;
-//		this.identificador = dNI;
-//		this.direccion = direccion;
-//		this.nacionalidad = nacionalidad;
-//		this.isAdmin = isAdmin;
-//		this.isPolitician = isPolitician;
-//	}
-	/**
-	 * 
-	 * @param nombre
-	 * @param apellidos
-	 * @param password
-	 * @param email
-	 * @param ID tambien puede tomarse como el DNI para las personas
-	 * @param direccion
-	 * @param kind
-	 * @param kindCode
-	 */
-	public Agent(String nombre, String password, String email, String identificador,
-			String direccion, String kind, int kindCode) {
-		super();
-		this.nombre = nombre; //El nombre va en conjunto con los apellidos
-		this.password = password;
-		this.email = email;
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getLocalizacion() {
+		return localizacion;
+	}
+
+	public void setLocalizacion(String localizacion) {
+		this.localizacion = localizacion;
+	}
+
+	public Type getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Type tipo) {
+		this.tipo = tipo;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setIdentificador(String identificador) {
 		this.identificador = identificador;
-		this.direccion = direccion;
-		this.kindCode = kindCode;
-		this.kind = kind;
 	}
 
 	public Long getId() {
@@ -95,20 +83,12 @@ public class Agent {
 		return nombre;
 	}
 
-	public String getApellidos() {
-		return apellidos;
-	}
-
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
 	}
 
 	public String getEmail() {
@@ -121,19 +101,6 @@ public class Agent {
 
 	public String getIdentificador() {
 		return identificador;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-
-	public String getKind() {
-		return kind;
-	}
-
-	public int getKindCode() {
-		return kindCode;
 	}
 
 	@Override
@@ -160,13 +127,5 @@ public class Agent {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "Agent [id=" + id + ", nombre=" + nombre + ", password=" + password + ", email=" + email
-				+ ", identificador=" + identificador + ", direccion=" + direccion + ", kind=" + kind + ", kindCode="
-				+ kindCode + "]";
-	}
-
 
 }

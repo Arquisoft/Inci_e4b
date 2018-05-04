@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -38,6 +39,7 @@ import com.uniovi.entities.extras.Status;
  *que es el operario al que se le ha asignado esta incidencia.</p>
  */
 @Entity
+@Table(name = "incidence")
 public class Incidencia {
 	/**
 	 * Numero de identificacion de la incidencia
@@ -55,6 +57,8 @@ public class Incidencia {
 	 * Descripción de la incidencia
 	 */
 	private String description;	
+	
+	private String sender;
 	
 	/**
 	 * Localizacion de la incidencia
@@ -318,6 +322,14 @@ public class Incidencia {
 	 */
 	public Set<Notificacion> getNotificaciones(){
 		return notificaciones;
+	}
+	
+	public String getSender() {
+		return sender;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
 	}
 
 	/**

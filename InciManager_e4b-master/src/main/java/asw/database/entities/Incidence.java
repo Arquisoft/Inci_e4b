@@ -2,17 +2,24 @@ package asw.database.entities;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-import asw.database.location.Location;
-import asw.database.status.Status;
+import asw.database.entities.extras.Location;
+import asw.database.entities.extras.Status;
 
 @Entity
 public class Incidence {
@@ -20,21 +27,35 @@ public class Incidence {
 	@GeneratedValue
 	private Long id;
 
-	private String user;
-	private String password;
+	private String sender;
+
 	private String incidenceName;
-	private String descripcion;
+	private String description;
 	@Embedded
-	private Location localizacion;
+	private Location location;
 	@ElementCollection
 	private List<String> tags; // Etiquetas
 	@ElementCollection
 	private Map<String, String> campos; // Campos propiedad valor
 
 	// Campos añadidos
+	@Enumerated(EnumType.STRING)
 	private Status status;
 	private String comments;
 	private Date expirationDate;
+	
+	/**
+	 * Operario al cual esta asignada la incidencia
+	 */
+	@ManyToOne
+	@JoinColumn(name = "operario")
+	private Operario operario;
+	
+	/**
+	 * Conjunto de notificaciones de la incidencia
+	 */
+	@OneToMany(mappedBy ="incidencia")
+	private Set<Notificacion> notificaciones = new HashSet<Notificacion>();
 
 	/**
 	 * Consturctor el cual hace uso de la propiedad campos
@@ -52,11 +73,10 @@ public class Incidence {
 			Location localizacion, List<String> tags, HashMap<String, String> campos) {
 		super();
 		this.id = id;
-		this.user = user;
-		this.password = password;
+		this.sender = user;
 		this.incidenceName = incidenceName;
-		this.descripcion = descripcion;
-		this.localizacion = localizacion;
+		this.description = descripcion;
+		this.location = localizacion;
 		this.tags = tags;
 		this.campos = campos;
 
@@ -79,11 +99,10 @@ public class Incidence {
 			Location localizacion, List<String> tags) {
 		super();
 		this.id = id;
-		this.user = user;
-		this.password = password;
+		this.sender = user;
 		this.incidenceName = incidenceName;
-		this.descripcion = descripcion;
-		this.localizacion = localizacion;
+		this.description = descripcion;
+		this.location = localizacion;
 		this.tags = tags;
 
 	}
@@ -108,11 +127,10 @@ public class Incidence {
 			Date expirationDate) {
 		super();
 		this.id = id;
-		this.user = user;
-		this.password = password;
+		this.sender = user;
 		this.incidenceName = incidenceName;
-		this.descripcion = descripcion;
-		this.localizacion = localizacion;
+		this.description = descripcion;
+		this.location = localizacion;
 		this.tags = tags;
 		this.campos = campos;
 		this.status = status;
@@ -131,19 +149,11 @@ public class Incidence {
 	}
 
 	public String getUser() {
-		return user;
+		return sender;
 	}
 
 	public void setUser(String user) {
-		this.user = user;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+		this.sender = user;
 	}
 
 	public String getIncidenceName() {
@@ -155,19 +165,19 @@ public class Incidence {
 	}
 
 	public String getDescripcion() {
-		return descripcion;
+		return description;
 	}
 
 	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+		this.description = descripcion;
 	}
 
 	public Location getLocalizacion() {
-		return localizacion;
+		return location;
 	}
 
 	public void setLocalizacion(Location localizacion) {
-		this.localizacion = localizacion;
+		this.location = localizacion;
 	}
 
 	public List<String> getTags() {
@@ -237,8 +247,8 @@ public class Incidence {
 
 	@Override
 	public String toString() {
-		return "Incidence [incidenceName=" + incidenceName + ", descripcion=" + descripcion + ", localizacion="
-				+ localizacion + ", tags=" + tags + ", campos=" + campos + ", status=" + status + ", comments="
+		return "Incidence [incidenceName=" + incidenceName + ", descripcion=" + description + ", localizacion="
+				+ location + ", tags=" + tags + ", campos=" + campos + ", status=" + status + ", comments="
 				+ comments + ", expirationDate=" + expirationDate + "]";
 	}
 	

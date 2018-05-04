@@ -17,7 +17,7 @@ public class FilterBySenderKind implements Filter{
 	public boolean filtrar(Incidence i) {
 		String emailSender = i.getUser();
 		Agent sender = agentRepository.findByEmail(emailSender);
-		String senderKind = sender.getKind();
+		String senderKind = sender.getTipo().getType();
 		if(senderKind.equals("Person") || senderKind.equals("Entidad"))
 			return true;
 		if(senderKind.equals("Sensor"))

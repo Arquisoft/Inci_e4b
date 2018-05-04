@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import asw.database.entities.Incidence;
-import asw.database.location.Location;
+import asw.database.entities.extras.Location;
 
 //Clase creada con el patrón Singleton
 public class ChatBot {

@@ -77,17 +77,6 @@ public class MainTest {
 	}
 
 	@Test
-	public void t2domainModelToString() {
-		Agent participant1 = getParticipant.getParticipant("12345678B");
-		assertEquals(participant1.toString(),
-				"Agent [id=" + participant1.getId() + ", nombre=" + participant1.getNombre() + ", password=" + participant1.getPassword()
-				+ ", email=" + participant1.getEmail()
-				+ ", identificador=" + participant1.getIdentificador() + ", direccion=" + participant1.getDireccion() 
-				+ ", kind=" + participant1.getKind() + ", kindCode="
-				+ participant1.getKindCode() + "]");
-	}
-
-	@Test
 	public void t3domainModelHashCodeTest() {
 		Agent participant1 = getParticipant.getParticipant("12345678B");
 		Agent participant3 = getParticipant.getParticipant("12345678B");

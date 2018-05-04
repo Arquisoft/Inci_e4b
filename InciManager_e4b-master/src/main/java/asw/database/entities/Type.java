@@ -1,4 +1,4 @@
-package model;
+package asw.database.entities;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_type")
+@Table(name = "UserType")
 public class Type implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -20,7 +20,7 @@ public class Type implements Serializable{
 	private String type;
 	
 	@OneToMany(mappedBy = "tipo")
-	private Set<User> usuarios = new HashSet<User>();
+	private Set<Agent> usuarios = new HashSet<Agent>();
 	
 	public Type(){}
 
@@ -82,7 +82,7 @@ public class Type implements Serializable{
 		this.type = type;
 	}
 
-	public Set<User> _getUsuarios() {
+	public Set<Agent> _getUsuarios() {
 		return this.usuarios;
 	}
 	

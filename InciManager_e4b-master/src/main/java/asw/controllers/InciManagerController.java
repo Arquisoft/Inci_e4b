@@ -18,8 +18,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import asw.chatbot.ChatBot;
 import asw.database.entities.Agent;
 import asw.database.entities.Incidence;
-import asw.database.location.Location;
-import asw.database.status.Status;
+import asw.database.entities.extras.Location;
+import asw.database.entities.extras.Status;
 import asw.filters.FilterBySenderKind;
 import asw.producers.KafkaProducer;
 import asw.services.IncidenceService;
@@ -53,11 +53,10 @@ public class InciManagerController {
 			@ModelAttribute Location loc) throws JsonProcessingException {
 
 		Agent agent = (Agent) session.getAttribute("agent");
-
+		
 		inci.setLocalizacion(loc);
-		inci.setStatus(Status.ABIERTA);
 		inci.setUser(agent.getEmail());
-		inci.setPassword(agent.getPassword());
+		inci.setStatus(Status.ABIERTA);
 		if (filterBySenderKind.filtrar(inci))
 			inciService.addIncidence(inci);
 		else
@@ -65,11 +64,12 @@ public class InciManagerController {
 
 		model.addAttribute("inciId", inci.getId());
 		
-		kafkaProducer.send("Nueva incidencia" + String.valueOf(inci.getId()), kafkaProducer.IncidenceIdToJson(inci));
+		kafkaProducer.send("incidence", String.valueOf(inci.getId()) );
 
 		return "/incidence/confirm";
 	}
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "incidence/chatbot")
 	private String chatBotGet(Model model, HttpSession session) {
 
@@ -91,12 +91,12 @@ public class InciManagerController {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="incidence/chatbot", method = RequestMethod.POST)
 	private String chatBotPost(HttpSession session, Model model, String answer) throws JsonProcessingException {
 		
 		ChatBot chatBot = ChatBot.getInstance();
 		
-		@SuppressWarnings("unchecked")
 		ArrayList<String> messages = (ArrayList<String>) session.getAttribute("messages");
 		
 		messages.add(answer);

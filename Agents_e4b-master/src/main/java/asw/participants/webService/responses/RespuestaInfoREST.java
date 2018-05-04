@@ -15,17 +15,15 @@ public class RespuestaInfoREST {
 	private String kind;
 	private int kindCode;
 	
-	
-	
 	public RespuestaInfoREST() {}
 	
 	public RespuestaInfoREST(Agent agent){
 		setFirstName(agent.getNombre());
 		setID(agent.getIdentificador());
 		setEmail(agent.getEmail());
-		setDireccion(agent.getDireccion());
-		setKind(agent.getKind());
-		setKindCode(agent.getKindCode());
+		setDireccion(agent.getLocalizacion());
+		setKind(agent.getTipo().getType());
+		setKindCode(agent.getTipo().getCode());
 	}
 	
 	
