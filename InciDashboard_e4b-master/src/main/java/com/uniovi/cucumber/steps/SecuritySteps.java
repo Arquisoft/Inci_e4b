@@ -27,15 +27,11 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class SecuritySteps {
-	static String PathFirefox = "C:\\Users\\UO251461\\Downloads\\sts-bundle\\Firefox46.win\\FirefoxPortable.exe";
 	
 	static WebDriver driver;
 	static String URL = "http://localhost:8090";
 	
-	public static WebDriver getDriver(String PathFirefox) {
-		// Firefox (Versión 46.0) sin geckodriver para Selenium 2.x.
-//		System.setProperty("webdriver.firefox.bin", PathFirefox);
-//		WebDriver driver = new FirefoxDriver();		
+	public static WebDriver getDriver() {	
 		driver = new HtmlUnitDriver();
 		return driver;
 	}
@@ -43,7 +39,7 @@ public class SecuritySteps {
 	@Given("^A user with username \"([^\"]*)\" and password \"([^\"]*)\"$")
 	
 	public void a_user_with_username_and_password(String nombre, String password) throws Throwable {
-		driver = getDriver(PathFirefox);
+		driver = getDriver();
 		driver.navigate().to(URL);
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		

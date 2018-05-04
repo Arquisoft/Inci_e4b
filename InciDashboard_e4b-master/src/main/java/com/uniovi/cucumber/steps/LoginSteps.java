@@ -29,22 +29,18 @@ import cucumber.api.java.en.When;
 
 
 public class LoginSteps {
-	static String PathFirefox = "C:\\Users\\UO251461\\Downloads\\sts-bundle\\Firefox46.win\\FirefoxPortable.exe";
 	
 	static WebDriver driver;
 	static String URL = "http://localhost:8090";
 	
-	public static WebDriver getDriver(String PathFirefox) {
-//		// Firefox (Versión 46.0) sin geckodriver para Selenium 2.x.
-//		System.setProperty("webdriver.firefox.bin", PathFirefox);
-//		WebDriver driver = new FirefoxDriver();		
+	public static WebDriver getDriver() {	
 		driver = new HtmlUnitDriver();
 		return driver;
 	}
 
 	@Given("^I open the browser and go to the website login$")
 	public void i_open_the_browser_and_go_to_the_website_login() throws Throwable {
-		driver = getDriver(PathFirefox);
+		driver = getDriver();
 		driver.navigate().to(URL);
 		System.out.println("Abro el navegador y voy a login");
 	}
