@@ -6,6 +6,12 @@ import org.springframework.stereotype.Service;
 import asw.database.AgentsRepository;
 import asw.database.entities.Agent;
 
+/**
+ * 
+ * Elemento de comunicación entre los controladores y
+ * AgentsRepository
+ *
+ */
 @Service
 public class AgentService {
 

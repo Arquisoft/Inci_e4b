@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import asw.producers.KafkaProducer;
 import asw.database.entities.*;
 
+/**
+ * 
+ * Controlador encargado de las páginas principales de la aplicación,
+ * como es el index.
+ *
+ */
 @Controller
 public class MainController {
 

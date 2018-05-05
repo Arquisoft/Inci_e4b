@@ -6,6 +6,12 @@ import org.springframework.stereotype.Service;
 import asw.database.IncidenceRepository;
 import asw.database.entities.Incidence;
 
+/**
+ * 
+ * Elemento de comunicación entre los controladores e
+ * IncidenceRepository
+ *
+ */
 @Service
 public class IncidenceService {
 

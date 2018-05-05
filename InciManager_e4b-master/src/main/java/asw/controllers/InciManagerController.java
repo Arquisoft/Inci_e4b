@@ -24,6 +24,12 @@ import asw.filters.FilterBySenderKind;
 import asw.producers.KafkaProducer;
 import asw.services.IncidenceService;
 
+/**
+ * 
+ * Controlador encargado de las páginas relacionadas con la generación
+ * de incidencias.
+ *
+ */
 @Controller
 public class InciManagerController {
 

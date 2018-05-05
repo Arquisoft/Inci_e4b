@@ -13,6 +13,12 @@ import asw.database.entities.Agent;
 import asw.services.AgentService;
 import asw.util.Assert;
 
+/**
+ * 
+ * Controlador encargado de las páginas relacionadas con la autentificación
+ * de los agentes.
+ *
+ */
 @Controller
 public class AgentsController {
 
