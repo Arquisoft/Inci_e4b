@@ -21,7 +21,6 @@ import asw.database.entities.Incidence;
 import asw.database.entities.extras.Location;
 import asw.database.entities.extras.Status;
 import asw.filters.FilterBySenderKind;
-import asw.producers.KafkaProducer;
 import asw.services.IncidenceService;
 
 /**
@@ -32,10 +31,6 @@ import asw.services.IncidenceService;
  */
 @Controller
 public class InciManagerController {
-
-	@Autowired
-	private KafkaProducer kafkaProducer;
-	
 	@Autowired
 	private IncidenceService inciService;
 
@@ -70,7 +65,7 @@ public class InciManagerController {
 
 		model.addAttribute("inciId", inci.getId());
 		
-		kafkaProducer.send("incidence", String.valueOf(inci.getId()) );
+		inciService.sendIncidence(String.valueOf(inci.getId()));
 
 		return "/incidence/confirm";
 	}

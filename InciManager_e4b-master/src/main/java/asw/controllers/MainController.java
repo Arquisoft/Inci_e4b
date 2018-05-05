@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import asw.producers.KafkaProducer;
-import asw.database.entities.*;
+import asw.database.entities.Message;
+import asw.services.IncidenceService;
 
 /**
  * 
@@ -19,9 +19,9 @@ import asw.database.entities.*;
  */
 @Controller
 public class MainController {
-
-    @Autowired
-    private KafkaProducer kafkaProducer;
+	
+	@Autowired
+	private IncidenceService inciService;
 
     @RequestMapping("/index")
     public String index(Model model) {
@@ -41,7 +41,7 @@ public class MainController {
     
     @RequestMapping("/send")
     public String send(Model model, @ModelAttribute Message message) {
-        kafkaProducer.send("exampleTopic", message.getMessage());
+    	inciService.sendIncidence(message);
         return "redirect:/";
     }
 

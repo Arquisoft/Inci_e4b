@@ -43,7 +43,7 @@ public class AgentsController {
 		if (Assert.isUserIdEmpty(userid) || Assert.isPasswordEmpty(password)) {
 			return "login";
 		}
-
+		
 		Agent agent = agentService.getAgentByEmail(userid);
 
 		if (Assert.isAgentNull(agent)) {

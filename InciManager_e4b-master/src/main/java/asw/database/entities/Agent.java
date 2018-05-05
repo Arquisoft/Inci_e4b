@@ -39,6 +39,18 @@ public class Agent {
 	public Agent() {
 	}
 
+	
+	
+	public Agent(String nombre, String email, String username, String password) {
+		super();
+		this.nombre = nombre;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+	}
+
+
+
 	public String getUsername() {
 		return username;
 	}
