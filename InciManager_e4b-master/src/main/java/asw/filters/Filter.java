@@ -7,5 +7,5 @@ import asw.database.entities.Incidence;
 @Service
 public interface Filter {
 
-	public boolean filtrar(Incidence i);
+	public boolean filter(Incidence i);
 }

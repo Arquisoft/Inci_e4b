@@ -28,7 +28,7 @@ public class FilterBySenderKind implements Filter{
 	 * 		por un sensor.
 	 */
 	@Override
-	public boolean filtrar(Incidence i) {
+	public boolean filter(Incidence i) {
 		String emailSender = i.getUser();
 		Agent sender = agentRepository.findByEmail(emailSender);
 		String senderKind = sender.getTipo().getType();

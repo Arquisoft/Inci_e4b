@@ -20,7 +20,6 @@ import asw.database.entities.Agent;
 import asw.database.entities.Incidence;
 import asw.database.entities.extras.Location;
 import asw.database.entities.extras.Status;
-import asw.filters.FilterBySenderKind;
 import asw.services.IncidenceService;
 
 /**
@@ -33,9 +32,6 @@ import asw.services.IncidenceService;
 public class InciManagerController {
 	@Autowired
 	private IncidenceService inciService;
-
-	@Autowired
-	private FilterBySenderKind filterBySenderKind;
 
 	@RequestMapping(value = "/incidence/add")
 	private String GETaddIncidence(HttpSession session, Model model) {
@@ -58,7 +54,7 @@ public class InciManagerController {
 		inci.setLocalizacion(loc);
 		inci.setUser(agent.getEmail());
 		inci.setStatus(Status.ABIERTA);
-		if (filterBySenderKind.filtrar(inci))
+		if (inciService.filterIncidence(inci))
 			inciService.addIncidence(inci);
 		else
 			return "redirect:/";

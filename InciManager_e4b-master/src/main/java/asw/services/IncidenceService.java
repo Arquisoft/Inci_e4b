@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import asw.database.IncidenceRepository;
 import asw.database.entities.Incidence;
 import asw.database.entities.Message;
+import asw.filters.FilterBySenderKind;
 import asw.producers.KafkaProducer;
 
 /**
@@ -22,6 +23,9 @@ public class IncidenceService {
 
     @Autowired
     private KafkaProducer kafkaProducer;
+
+	@Autowired
+	private FilterBySenderKind filterBySenderKind;
 	
 	public void addIncidence(Incidence inci) {
 		incidenceRepo.save(inci);
@@ -33,5 +37,9 @@ public class IncidenceService {
 	
 	public void sendIncidence(String message) {
 		kafkaProducer.send("incidence", message);
+	}
+	
+	public boolean filterIncidence(Incidence inci) {
+		return filterBySenderKind.filter(inci);
 	}
 }
