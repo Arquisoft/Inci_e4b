@@ -1,13 +1,13 @@
 package dbupdate;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import executer.ActionSingleton;

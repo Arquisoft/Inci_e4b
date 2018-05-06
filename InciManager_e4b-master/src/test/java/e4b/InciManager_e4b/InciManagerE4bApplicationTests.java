@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +22,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import asw.database.entities.Incidence;
 import asw.producers.KafkaProducer;
-import cucumber.api.java.Before;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = InciManagerE4bApplicationTests.class)
@@ -31,6 +29,7 @@ public class InciManagerE4bApplicationTests {
 	private WebDriver driver= new HtmlUnitDriver();;
 	
 	private String url;
+	@SuppressWarnings("unused")
 	private StringBuffer verificationErrors = new StringBuffer();
 
 

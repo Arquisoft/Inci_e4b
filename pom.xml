@@ -4,7 +4,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
   <groupId>oes.uniovi.asw</groupId>
   <artifactId>Inci_e4b</artifactId>
   <version>1.0</version>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
   <modules>
       <module>Agents_e4b-master</module>
       <module>Loader_e4b-master</module>
