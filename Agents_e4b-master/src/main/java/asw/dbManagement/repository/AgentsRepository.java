@@ -9,10 +9,10 @@ import asw.dbManagement.model.Agent;
 public interface AgentsRepository extends CrudRepository<Agent, Long> {
 	
 	/**
-	 * Método que devuelve el Participante el cual es buscado por email
+	 * Método que devuelve el Agent el cual es buscado por email
 	 * en la base de datos
-	 * @param email del Partipante
-	 * @return El Participante con dicho email
+	 * @param email del Agent
+	 * @return El Agent con dicho email
 	 */
 	public Agent findByEmail(String email);
 	

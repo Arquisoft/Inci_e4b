@@ -1,6 +1,8 @@
-package asw.util;
+package asw.agents.util;
 
-import asw.database.entities.Agent;
+import asw.agents.factory.ErrorFactory;
+import asw.agents.factory.ErrorFactory.Errors;
+import asw.dbManagement.model.Agent;
 
 public class Assert {
 
@@ -11,14 +13,14 @@ public class Assert {
 	 */
 	public static boolean isEmailEmpty(String email) {
 		if(email.trim().isEmpty())
-			return true;
+			throw ErrorFactory.getError(Errors.REQUIRED_EMAIL);
 		else
 			return false;
 	}
 	
 	public static boolean isPasswordEmpty(String password) {
 		if(password.trim().isEmpty())
-			return true;
+			throw ErrorFactory.getError(Errors.REQUIRED_PASSWORD);
 		else
 			return false;
 	}
@@ -31,11 +33,11 @@ public class Assert {
 	public static boolean isEmailValid(String email) {
 		String[] mailSplit = email.split("@");
 		if (mailSplit.length != 2) {
-			return false;
+			throw ErrorFactory.getError(Errors.WRONG_EMAIL_STYLE);
 		}
 		mailSplit = email.split("\\.");
 		if (mailSplit.length != 2 || mailSplit[0].length() == 0 || mailSplit[1].length() == 0) {
-			return false;
+			throw ErrorFactory.getError(Errors.WRONG_EMAIL_STYLE);
 		}
 		return true;
 	}
@@ -45,44 +47,44 @@ public class Assert {
 	 * @param agente
 	 * @return devuelve false si no es null o excepcion
 	 */
-	public static boolean isAgentNull(Agent agent){
-		if (agent == null) {
-			return true;
+	public static boolean isAgentNull(Agent agente){
+		if (agente == null) {
+			throw ErrorFactory.getError(Errors.USER_NOT_FOUND);
 		}
 		return false;		
 	}
 	
-	public static boolean isPasswordCorrect(String password,Agent agent){
-		if (!password.equals(agent.getPassword())) {
-			return false;
+	public static boolean isPasswordCorrect(String password,Agent agente){
+		if (!password.equals(agente.getPassword())) {
+			throw ErrorFactory.getError(Errors.INCORRECT_PASSWORD_DO_NOT_MATCH);
 		}
 		return true;
 	}
 	
 	public static boolean isSamePassword(String password, String password2){
 		if (password.equals(password2)) {
-			return false;
+			throw ErrorFactory.getError(Errors.INCORRECT_PASSWORD);
 		}
 		return true;
 	}
 
 	public static boolean isSameEmail(String email, String email2){
 		if (email.equals(email2)) {
-			return false;
+			throw ErrorFactory.getError(Errors.SAME_EMAIL);
 		}
 		return true;
 	}
 	
 	public static boolean isUserIdEmpty(String userId) {
 		if(userId.trim().isEmpty())
-			return true;
+			throw ErrorFactory.getError(Errors.REQUIRED_USERID);
 		else
 			return false;
 	}
 	
 	public static boolean isKindEmpty(String kind) {
 		if(kind.trim().isEmpty())
-			return true;
+			throw ErrorFactory.getError(Errors.REQUIRED_KIND);
 		else
 			return false;
 	}
