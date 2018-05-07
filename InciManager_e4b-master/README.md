@@ -43,9 +43,15 @@ InciDashboard -> localhost:8090
 
 ### Agente de prueba
 ```
-Email: paco@hotmail.com
+Email: juan@example.com
 
-Password: 123456
+Password: IAXIDQEWN833
+
+Kind: Person
+
+Email: ana@example.com  
+
+Password: GGJCCQSBT511
 
 Kind: Person
 ```
