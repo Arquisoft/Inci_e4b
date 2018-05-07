@@ -42,12 +42,12 @@ public class AgentsController {
 
 		if (Assert.isAgentNull(agent)) {
 			System.out.println("El agente no existe");
-			return "login";
+			return "loginBad";
 		}
 
 		if (!Assert.isPasswordCorrect(password, agent)) {
 			System.out.println("Contraseña incorrecta");
-			return "login";
+			return "loginBad";
 		}
 
 		session.setAttribute("agent", agent);
