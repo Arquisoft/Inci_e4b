@@ -45,13 +45,19 @@ InciDashboard -> localhost:8090
 ```
 Email: juan@example.com
 
-Password: IAXIDQEWN833
+Password: ONFGVCMSJ870
 
 Kind: Person
 
 Email: ana@example.com  
 
-Password: GGJCCQSBT511
+Password: SCCPRWGGB560
+
+Kind: Person
+
+Email: luis@example.com  
+
+Password: FUDLPBJQI774
 
 Kind: Person
 ```
