@@ -1,11 +1,7 @@
 package e4b.InciManager_e4b.steps;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -15,11 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import asw.controllers.AgentsController;
-import asw.database.entities.Agent;
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -33,6 +26,7 @@ public class LoginSteps {
 	private WebDriver driver;
 	
 	private String baseUrl;
+	@SuppressWarnings("unused")
 	private StringBuffer verificationErrors = new StringBuffer();
 
 
@@ -80,7 +74,9 @@ public class LoginSteps {
   
   
   public static class User {
-    private String name;
-    private String password;
+    @SuppressWarnings("unused")
+	private String name;
+    @SuppressWarnings("unused")
+	private String password;
   }
 }

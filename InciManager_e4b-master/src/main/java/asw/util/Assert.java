@@ -42,7 +42,7 @@ public class Assert {
 	
 	/**
 	 * 
-	 * @param participant
+	 * @param agente
 	 * @return devuelve false si no es null o excepcion
 	 */
 	public static boolean isAgentNull(Agent agent){

@@ -13,6 +13,12 @@ import asw.database.entities.Agent;
 import asw.services.AgentService;
 import asw.util.Assert;
 
+/**
+ * 
+ * Controlador encargado de las páginas relacionadas con la autentificación
+ * de los agentes.
+ *
+ */
 @Controller
 public class AgentsController {
 
@@ -37,7 +43,7 @@ public class AgentsController {
 		if (Assert.isUserIdEmpty(userid) || Assert.isPasswordEmpty(password)) {
 			return "login";
 		}
-
+		
 		Agent agent = agentService.getAgentByEmail(userid);
 
 		if (Assert.isAgentNull(agent)) {

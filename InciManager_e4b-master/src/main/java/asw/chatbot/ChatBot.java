@@ -4,9 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import asw.database.entities.Incidence;
-import asw.database.location.Location;
+import asw.database.entities.extras.Location;
 
-//Clase creada con el patrón Singleton
+/**
+ * 
+ * Clase realizada para la actividad opcional de realizar un ChatBot.
+ * Permite la creación de incidencias por usuarios humanos mediante
+ * una guía, simulando una interacción con otro humano.
+ * Clase creada con el patrón Singleton y el patrón State.
+ *
+ */
 public class ChatBot {
 
 	static private ChatBot chatBot = new ChatBot();
@@ -59,7 +66,9 @@ public class ChatBot {
 		this.finalValues = finalValues;
 	}
 
-	// Inicializa los mensajes del bot
+	/**
+	 * Inicializa todos los mensajes por defecto del bot.
+	 */
 	public void initMessages() {
 		messages = new HashMap<Integer, String>();
 		errorMessages = new HashMap<Integer, String>();
@@ -88,7 +97,7 @@ public class ChatBot {
 						+ "Necesitamos que nos introduzca la posición del incidente para poder procesarlo.\n"
 						+ "Por favor, introduzca un dígito numérico que represente la latitud del incidente.");
 
-		// cUARTO estado
+		// Cuarto estado
 		messages.put(3,
 				"Ya casi hemos terminado.\n "
 						+ "Sólo falta que introduzca la longitud del incidente y habremos terminado.");

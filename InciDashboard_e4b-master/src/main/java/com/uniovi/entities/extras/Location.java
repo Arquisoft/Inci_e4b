@@ -5,8 +5,8 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Location {
 	
-	private double latitude;
-	private double longitude;
+	protected double latitude;
+	protected double longitude;
 	
 	/**
 	 * Constructor vacio

@@ -1,11 +1,8 @@
 package parser.uploader;
 
-import com.lowagie.text.DocumentException;
 import dbupdate.InsertT;
 import model.Type;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 
 public class TypeUploader implements ClassAppend{
@@ -13,7 +10,7 @@ public class TypeUploader implements ClassAppend{
     public void addMethod(List<String> toAdd){
         for(String line : toAdd) {
             String[] tipo = line.split(",");
-            Type type = crearTipo(tipo);
+            crearTipo(tipo);
         }
     }
 

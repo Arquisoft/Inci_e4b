@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>es.uniovi.asw</groupId>
-	<artifactId>dashboard0</artifactId>
-	<name>dashboard0</name>
-	<version>0.0.1</version>
+	<artifactId>InciDashboard_e4b</artifactId>
+	<name>InciDashboard_e4b</name>
+	<version>0.0.2</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -15,6 +15,12 @@
 	</parent>
 	
 	<dependencies>
+	
+		<dependency>
+    		<groupId>org.json</groupId>
+    		<artifactId>json</artifactId>
+    		<version>20180130</version>
+		</dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -96,16 +102,20 @@
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-junit</artifactId>
 			<version>1.2.5</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-spring</artifactId>
 			<version>1.2.5</version>
-			<scope>test</scope>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-htmlunit-driver</artifactId>
+			<version>2.52.0</version>
+		</dependency>
+       
 	</dependencies>
 
 	<dependencyManagement>

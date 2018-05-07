@@ -1,6 +1,5 @@
 package parser.reader;
 
-import com.lowagie.text.DocumentException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -27,7 +26,6 @@ public class XLSXReader implements ReadList {
         InputStream excelFile = null;
         XSSFWorkbook excel = null;
         lines = new ArrayList<String>();
-        List<List<XSSFCell>> allUsers = new ArrayList<List<XSSFCell>>();
         int i = 0;
         try {
             excelFile = new FileInputStream(path);

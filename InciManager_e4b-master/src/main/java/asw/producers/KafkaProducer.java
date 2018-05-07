@@ -19,6 +19,13 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 
 import asw.database.entities.Incidence;
 
+/**
+ * 
+ * Elemento encargado de la comunicación con el módulo InciDashboard
+ * a través de la tecnología externa Kafka. 
+ * Se comunica de forma asíncrona mediante JSON.
+ *
+ */
 @ManagedBean
 public class KafkaProducer {
 
@@ -27,6 +34,10 @@ public class KafkaProducer {
 	@Autowired
 	private KafkaTemplate<String, String> kafkaTemplate;
 
+	/**
+	 * Convierte una incidencia a formato JSON para posteriormente
+	 * enviarla al módulo InciDashboard para su gestión.
+	 */
 	public void send(String topic, Incidence incidence) {
 
 		try {
@@ -61,6 +72,10 @@ public class KafkaProducer {
 		return mapper.readValue(json, Incidence.class);
 	}
 	
+	/**
+	 * Recibe un mensaje que debe estar construido acorde al formato JSON
+	 * para enviarlo al módulo InciDashboard para su posterior gestión.
+	 */
 	public void send(String topic, String data) {
 		ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, data);
 		future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
