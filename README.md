@@ -4,7 +4,9 @@ Incidence system e4b
 # Subsistemas
 
 ## Loader
-[![Build Status](https://travis-ci.org/Arquisoft/Loader_e4b.svg?branch=master)](https://travis-ci.org/Arquisoft/Loader_e4b) [![codecov](https://codecov.io/gh/Arquisoft/Loader_e4b/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/Loader_e4b) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aeca0021c27447d1abfaec98ceed9508)](https://www.codacy.com/app/jelabra/Loader_e4b?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Arquisoft/Loader_e4b&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/Arquisoft/Loader_e4b.svg?branch=master)](https://travis-ci.org/Arquisoft/Loader_e4b)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aeca0021c27447d1abfaec98ceed9508)](https://www.codacy.com/app/jelabra/Loader_e4b?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Arquisoft/Loader_e4b&amp;utm_campaign=Badge_Grade)
+[![codecov](https://codecov.io/gh/Arquisoft/Loader_e4b/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/Loader_e4b)
 
 ## Agents
 [![Build Status](https://travis-ci.org/Arquisoft/Agents_e4b.svg?branch=master)](https://travis-ci.org/Arquisoft/Agents_e4b)
@@ -17,8 +19,8 @@ Incidence system e4b
 [![codecov](https://codecov.io/gh/Arquisoft/InciManager_e4b/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/InciManager_e4b)
 
 ## InciDashboard
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e9d0acdac1f4427698134e010ffbd3fe)](https://www.codacy.com/app/AlexGPlay/InciDashboard_e4b?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Arquisoft/InciDashboard_e4b&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/Arquisoft/InciDashboard_e4b.svg?branch=master)](https://travis-ci.org/Arquisoft/InciDashboard_e4b)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e9d0acdac1f4427698134e010ffbd3fe)](https://www.codacy.com/app/AlexGPlay/InciDashboard_e4b?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Arquisoft/InciDashboard_e4b&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/Arquisoft/InciDashboard_e4b/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/InciDashboard_e4b)
 
 # Descripción
