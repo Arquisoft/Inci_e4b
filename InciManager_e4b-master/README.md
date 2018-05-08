@@ -43,19 +43,19 @@ InciDashboard -> localhost:8090
 
 ### Agente de prueba
 ```
-Email: juan@example.com
+DNI: 87654321P
 
 Password: ONFGVCMSJ870
 
 Kind: Person
 
-Email: ana@example.com  
+DNI: 19160962F  
 
 Password: SCCPRWGGB560
 
 Kind: Person
 
-Email: luis@example.com  
+DNI: 09940449X
 
 Password: FUDLPBJQI774
 
