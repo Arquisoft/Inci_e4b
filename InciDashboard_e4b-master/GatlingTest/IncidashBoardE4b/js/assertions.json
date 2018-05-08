@@ -1,0 +1,10 @@
+{
+  "simulation": "com.uniovi.Aplication",
+  "simulationId": "aplication",
+  "start": 1525799796912,
+  "description": "",
+  "scenarios": ["Aplication"],
+  "assertions": [
+
+  ]
+}
