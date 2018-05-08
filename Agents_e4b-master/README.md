@@ -39,40 +39,24 @@ Una vez tengáis en ejecución la aplicación, deberéis acceder a la dirección
 
 # Usuarios de prueba para la aplicación
 
-- Email: paco@hotmail.com <br>
-  Contraseña: 123456 <br>
-  Nombre: Paco Gómez <br>
-  Fecha de nacimiento: 08/16/1970 <br>
-  DNI: 12345678B <br>
-  Dirección: Calle Uría <br>
-  Nacionalidad: Española <br>
+Se accede mediante el DNI:
+
+- Email: juan@example.com <br>
+  Contraseña: UDDFJEMVG310 <br>
+  Nombre: Juan Torres Pardo <br>
+  DNI: 87654321P <br>
   Kind: Person  <br>
 
-- Email: pepe@gmail.com <br>
- Contraseña: 123456 <br>
- Nombre: Pepe Fernández
- Fecha de nacimiento: 02/23/1975 <br>
- DNI: 87654321B <br>
- Dirección: Calle Principal <br>
- Nacionalidad: Española <br>
- Kind: Person  <br>
+- Email: luis@example.com <br>
+  Contraseña: OIOGQFCYR680 <br>
+  Nombre: Luis López Fernando <br>
+  DNI: 19160962F <br>
+  Kind: Person  <br>
 
-- Email: carmen@yahoo.com <br>
- Contraseña: 123456 <br>
- Nombre: Carmen López <br>
- Fecha de nacimiento: 08/16/1970 <br>
- DNI: 11223344C <br>
- Dirección: Calle Calvo Sotelo <br>
- Nacionalidad: Española <br>
- Kind: Person  <br>
-
-- Email: isabel@gmail.com <br>
- Contraseña: 123456 <br>
- Nombre: Isabel Rodríguez <br>
- Fecha de nacimiento: 02/23/1975 <br>
- DNI: 22334455D <br>
- Dirección: Avenida Galicia <br>
- Nacionalidad: Española <br>
- Kind: Person  <br>
+- Email: ana@example.com <br>
+  Contraseña: YUQUVKGJA230 <br>
+  Nombre: Ana Torres Pardo <br>
+  DNI: 09940449X <br>
+  Kind: Person  <br>
 
 
