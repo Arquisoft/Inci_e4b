@@ -6,7 +6,6 @@
     <version>0.0.1</version>
     <name>Loader_e4b</name>
     <packaging>jar</packaging>
-    <description>Citizens SubSystem</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
